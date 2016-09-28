@@ -35,18 +35,69 @@ $ go run main.go
 
 ### cURL Examples
 
+#### Rebel Alliance Queries
+
+Fetch the Rebel faction name:
+
 ```bash
 $ curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '
 {
-    "query": "query RebelsShipsQuery { rebels { name ships(first: 1) { edges { node { name } } } } }",
+    "query": "query { rebels { name } }", 
     "variables": null
 }'
 ```
 
-One liner:
+Fetch the first Rebel ship:
 
-> curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/graphql' -d 'query RebelsShipsQuery{ rebels { name ships(first; 1) { edges { node { name } } } } }'
+```bash
+$ curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '
+{
+    "query": "query { rebels { name ships(first: 1) { edges { node { name } } } } }",
+    "variables": null
+}'
+```
 
+Fetch all Rebel ships:
+
+```bash
+$ curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '
+{
+    "query": "query { rebels { name ships { edges { node { name } } } } }",
+    "variables": null
+}'
+```
+
+#### Empire Queries
+
+Fetch the Empire faction name:
+
+```bash
+$ curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '
+{
+    "query": "query { empire { name } }", 
+    "variables": null
+}'
+```
+
+Fetch the first Empire ship:
+
+```bash
+$ curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '
+{
+    "query": "query { empire { name ships(first: 1) { edges { node { name } } } } }",
+    "variables": null
+}'
+```
+
+Fetch all Empire ships:
+
+```bash
+$ curl -X POST http://localhost:3000/graphql -H 'Content-Type: application/json' -d '
+{
+    "query": "query { empire { name ships { edges { node { name } } } } }",
+    "variables": null
+}'
+```
 
 ### Docker How To
 
